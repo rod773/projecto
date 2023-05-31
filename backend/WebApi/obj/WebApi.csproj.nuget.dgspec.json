@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROYECTO\\WebApi\\WebApi.csproj": {}
+    "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "D:\\PROYECTO\\WebApi\\WebApi.csproj": {
+    "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROYECTO\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "D:\\PROYECTO\\WebApi\\WebApi.csproj",
+        "projectPath": "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "D:\\PROYECTO\\WebApi\\obj\\",
+        "outputPath": "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,17 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.33, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
