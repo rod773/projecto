@@ -1,0 +1,17 @@
+@mixin borderbox {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@mixin flexcenter($flex-direccion: row) {
+    display: flex;
+    flex-direction: $flex-direccion;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin w-100 {
+    width: 100%;
+    height: 100%;
+}

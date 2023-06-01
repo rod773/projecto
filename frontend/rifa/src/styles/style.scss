@@ -1,0 +1,26 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+* {
+    @include borderbox;
+}
+
+html {
+    font-size: $font-size !important;
+}
+
+.v-application {
+    width: 100%;
+    height: 100vh;
+    background-color: $pink !important;
+    background-image: $gradient !important;
+}
+
+v-content {
+    @include w-100;
+    height: 200vh;
+}
+
+#headertop {
+    background-color: $indigo;
+}
