@@ -23,4 +23,21 @@ v-content {
 
 #headertop {
     background-color: $indigo;
+    animation: fadeIn 2s linear;
+}
+
+#headerbottom {
+    animation: fadeIn 1s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
 }

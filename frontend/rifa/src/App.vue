@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar id="headertop" color="">
+    <v-app-bar id="headertop">
       <img src="@/assets/logo.png" alt="" />
       <v-toolbar-title>Menu</v-toolbar-title>
     </v-app-bar>
@@ -9,7 +9,9 @@
       <v-toolbar-title>Menu</v-toolbar-title>
     </v-app-bar>
     <v-content>
-      <router-view></router-view>
+      <v-scroll-x-transition mode="in" hide-on-leave>
+        <router-view></router-view>
+      </v-scroll-x-transition>
     </v-content>
     <v-footer dark>
       <v-layout justify-center> footer </v-layout>
@@ -29,10 +31,13 @@ window.addEventListener("scroll", () => {
   let pos = window.scrollY;
   if (pos > 50) {
     headertop.value.style.display = "none";
+
     headerbottom.value.style.top = 0;
   } else {
     headertop.value.style.display = "block";
     headerbottom.value.style.top = "64px";
+    headerbottom.value.style.display = "none";
+    setTimeout(() => (headerbottom.value.style.display = "block"), 500);
   }
 });
 
