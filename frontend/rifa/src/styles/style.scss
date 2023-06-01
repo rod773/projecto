@@ -18,16 +18,19 @@ html {
 
 v-content {
     @include w-100;
-    height: 200vh;
+    height: 2000px;
 }
 
 #headertop {
-    background-color: $indigo;
+    height: 100px;
+    background-color: rgba($indigo, 0.5);
     animation: fadeIn 2s linear;
 }
 
 #headerbottom {
+    height: 100px;
     animation: fadeIn 1s linear;
+    background-color: rgba($dark, 0.5);
 }
 
 @keyframes fadeIn {
@@ -40,4 +43,10 @@ v-content {
         visibility: visible;
         opacity: 1;
     }
+}
+
+.btn-up {
+    position: fixed !important;
+    bottom: 100px;
+    right: 50px;
 }

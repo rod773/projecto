@@ -9,10 +9,11 @@
       <v-toolbar-title>Menu</v-toolbar-title>
     </v-app-bar>
     <v-content>
-      <v-scroll-x-transition mode="in" hide-on-leave>
-        <router-view></router-view>
-      </v-scroll-x-transition>
+      <router-view></router-view>
     </v-content>
+    <v-btn class="btn-up" icon @click="scrollUp()"
+      ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
+    >
     <v-footer dark>
       <v-layout justify-center> footer </v-layout>
     </v-footer>
@@ -27,15 +28,22 @@ const headertop = ref();
 
 const headerbottom = ref();
 
+const scrollUp = () => {
+  let pos = window.scrollY;
+  let interval = setInterval(() => {
+    pos = document.documentElement.scrollTop = pos - 2;
+    if (pos < 100) clearInterval(interval);
+  }, 1);
+};
+
 window.addEventListener("scroll", () => {
   let pos = window.scrollY;
-  if (pos > 50) {
+  if (pos > 100) {
     headertop.value.style.display = "none";
-
     headerbottom.value.style.top = 0;
   } else {
     headertop.value.style.display = "block";
-    headerbottom.value.style.top = "64px";
+    headerbottom.value.style.top = "100px";
     headerbottom.value.style.display = "none";
     setTimeout(() => (headerbottom.value.style.display = "block"), 500);
   }
@@ -43,7 +51,11 @@ window.addEventListener("scroll", () => {
 
 onMounted(() => {
   headertop.value = document.querySelector("#headertop");
-
   headerbottom.value = document.querySelector("#headerbottom");
+  setTimeout(() => {
+    headerbottom.value.style.top = "100px";
+    headertop.value.style.top = "0px";
+    document.documentElement.scrollTop = 0;
+  }, 100);
 });
 </script>
