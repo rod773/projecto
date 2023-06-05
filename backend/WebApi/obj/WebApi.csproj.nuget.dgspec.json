@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj": {}
+    "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj": {
+    "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\WebApi.csproj",
+        "projectPath": "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "D:\\PROYECTO\\projecto - copia\\backend\\WebApi\\obj\\",
+        "outputPath": "D:\\PROYECTO\\projecto\\backend\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,9 +48,9 @@
               "target": "Package",
               "version": "[7.0.5, )"
             },
-            "MySql.Data": {
+            "MySqlConnector": {
               "target": "Package",
-              "version": "[8.0.33, )"
+              "version": "[2.2.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
