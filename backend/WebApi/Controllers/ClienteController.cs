@@ -27,5 +27,32 @@ namespace crudDapper.Controllers
 
             return repo.GetClientes();
         }
+
+
+        [HttpPost("PostClientes")]
+        public Cliente PostCliente(
+            string Nombres,
+            string Aoellidos,
+            int Telefono,
+            string Email,
+            string Pais
+            
+          )
+        {
+            string? conn = Configuration.GetConnectionString("Default");
+            Repositorio repo = new Repositorio(conn);
+
+            Cliente cliente = new Cliente();
+
+            cliente .Nombres = Nombres;
+            cliente.Apellidos = Aoellidos;
+            cliente.Telefono = Telefono;
+            cliente.Email= Email;   
+            cliente.Pais = Pais;
+           
+
+
+            return repo.AgregarCliente(cliente);
+        }
     }
 }
