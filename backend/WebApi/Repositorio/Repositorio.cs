@@ -62,7 +62,7 @@ namespace CrudDapper.Repositorio
 
         public void BorrarCliente(int id)
         {
-            var sql = "delete * from cliente where IdCliente=@IdCliente";
+            var sql = "delete  from cliente where IdCliente=@IdCliente";
 
             _bd.Execute(sql, new { @IdCliente = id });
         }

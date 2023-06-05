@@ -54,5 +54,20 @@ namespace crudDapper.Controllers
 
             return repo.AgregarCliente(cliente);
         }
+
+
+        [HttpDelete("DeleteCliente")]
+        public void DeleteCliente(int id)
+        {
+
+            string? conn = Configuration.GetConnectionString("Default");
+
+            Repositorio repo = new Repositorio(conn);
+
+
+            repo.BorrarCliente(id);
+
+
+        }
     }
 }
