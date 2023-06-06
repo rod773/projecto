@@ -1,5 +1,6 @@
 ﻿using CrudDapper.Models;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using System.Text;
@@ -8,77 +9,164 @@ namespace CrudDapper.Repositorio
 {
     public class Repositorio : IRepositorio
     {
-        private readonly IDbConnection _bd;
         
 
-        public Repositorio(string? conn)
-        {
-            _bd = new MySqlConnection(conn);
-        }
-        public Cliente ActualizarCliente(Cliente cliente)
-        {
+        private readonly string? _connectionString;
 
+        private readonly IConfiguration _configuration;
+
+
+        public Repositorio(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("Default");
+            
+        }
+
+
+        public IDbConnection CreateConnection()=>new MySqlConnection(_connectionString);
+        
+
+
+
+
+
+
+        public async Task ActualizarCliente(
+            int IdCliente,
+            string Nombres,
+            string Apellidos,
+            int Telefono,
+            string Email,
+            string Pais,
+            string FechaCreacion
+
+            )
+        {
+            using(var  conn = CreateConnection()) { 
+            
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("update cliente set Nombres=@Nombres,");
             sb.AppendLine("Apellidos=@Apellidos,");
-            sb.AppendLine("Telefono = 123456,");
+            sb.AppendLine("Telefono=@Telefono,");
             sb.AppendLine("Email = @Email,");
             sb.AppendLine("Pais = @Pais,");
-            sb.AppendLine("fechaCreacion = @FechaCreacion,");
+            sb.AppendLine("fechaCreacion = STR_TO_DATE(");
+            sb.AppendLine("@FechaCreacion");
+            sb.AppendLine(", '%Y-%m-%d')  ");
             sb.AppendLine("where idcliente = @IdCliente");
 
             var sql = sb.ToString ();
 
-            _bd.Execute(sql,cliente);
+            var res = await conn.ExecuteAsync(
+            sql, 
+            new {
+                @IdCliente = IdCliente,
+                @Nombres = Nombres,
+                @Apellidos = Apellidos,
+                @Telefono = Telefono,
+                @Email = Email,
+                @Pais = Pais,
+                @FechaCreacion = FechaCreacion,
+            });
 
-            return cliente;
+
+              
+            
+            }
+
+            
         }
 
-        public Cliente AgregarCliente(Cliente cliente)
+        public async Task<Cliente> AgregarCliente(
+
+            string Nombres,
+            string Apellidos,
+            int Telefono,
+            string Email,
+            string Pais
+
+            )
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("insert into cliente (Nombres, Apellidos, Telefono, Email, Pais, fechaCreacion) ");
-            sb.AppendLine("values(@Nombres, @Apellidos, @Telefono, @Email, @Pais, CURRENT_TIMESTAMP);") ; 
-
-            sb.AppendLine("SELECT LAST_INSERT_ID();");
-
+            sb.AppendLine("values(@Nombres, @Apellidos, @Telefono, @Email, @Pais, CURRENT_TIMESTAMP);") ;
+            sb.AppendLine("SELECT LAST_INSERT_ID();") ;
             var sql = sb.ToString();
 
-            var id = _bd.Query<int>(sql, new
+            using(var conn = CreateConnection()) { 
+            
+            var res =  await conn.QuerySingleAsync<int>(sql, new
             {
-                @Nombres = cliente.Nombres,
-                @Apellidos = cliente.Apellidos,
-                @Telefono = cliente.Telefono,  
-                @Email = cliente.Email,
-                @Pais = cliente.Pais,
-            }).Single();
+                @Nombres = Nombres,
+                @Apellidos = Apellidos,
+                @Telefono = Telefono,  
+                @Email = Email,
+                @Pais = Pais,
+            });
 
-            cliente.IdCliente = id;
 
-            return cliente;
+
+                var cliente = new Cliente
+                {
+                    IdCliente = res,
+                    Nombres = Nombres,
+                    Apellidos = Apellidos,
+                    Telefono= Telefono,
+                    Email = Email,
+                    Pais = Pais,
+                    FechaCreacion= DateTime.Now,    
+                };
+                return cliente;
+            }
+
+           
         }
 
-        public void BorrarCliente(int id)
+        public async Task<int> BorrarCliente(int id)
         {
-            var sql = "delete  from cliente where IdCliente=@IdCliente";
 
-            _bd.Execute(sql, new { @IdCliente = id });
+            using(var conn = CreateConnection())
+            {
+              var sql = "delete  from cliente where IdCliente=@IdCliente";
+
+              var res =  await conn.ExecuteAsync(sql, new { @IdCliente = id });
+
+              return res;
+           }
+            
+         }
+           
+
+        public async Task<Cliente> GetCliente(int id)
+        {
+            using (var conn = CreateConnection())
+            {
+                var sql = "select * from cliente where IdCliente=@IdCliente";
+
+                
+                var res  =  conn.QueryAsync<Cliente>(sql, new { @IdCliente = id });
+
+              
+                return (Cliente)await res;
+            }
         }
 
-        public Cliente GetCliente(int id)
+        public async Task<IEnumerable<Cliente>> GetClientes()
         {
-            var sql = "select * from cliente where IdCliente=@IdCliente";
+            using (var connection = CreateConnection())
+            {
 
-            return _bd.Query<Cliente>(sql,new { @IdCliente = id }).Single();
-        }
+                 var sql = "select * from cliente";
 
-        public List<Cliente> GetClientes()
-        {
-            var sql = "select * from cliente";
+                 var clientes = connection.QueryAsync<Cliente>(sql);
 
-            return _bd.Query<Cliente>(sql).ToList();
+                 return await clientes;
+
+            }
+                
         }
     }
 }

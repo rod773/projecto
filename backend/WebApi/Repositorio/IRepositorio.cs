@@ -1,17 +1,34 @@
 ﻿using CrudDapper.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace CrudDapper.Repositorio
 {
     public interface IRepositorio
     {
-        Cliente GetCliente(int id);
+        public Task<Cliente> GetCliente(int id);
 
-        List<Cliente> GetClientes();
+        public Task<IEnumerable<Cliente>> GetClientes();
 
-        Cliente AgregarCliente(Cliente cliente);
+        public Task<Cliente> AgregarCliente(
+            string Nombres,
+            string Apellidos,
+            int Telefono,
+            string Email,
+            string Pais
 
-        Cliente ActualizarCliente(Cliente cliente);
+            );
 
-        void BorrarCliente(int id);
+        public Task ActualizarCliente(
+            int IdCliente,
+            string Nombres,
+            string Apellidos,
+            int Telefono,
+            string Email,
+            string Pais,
+            string FechaCreacion
+            );
+
+        public Task<int> BorrarCliente(int id);
     }
 }

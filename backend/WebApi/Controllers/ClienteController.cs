@@ -9,63 +9,119 @@ namespace crudDapper.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        public IConfiguration Configuration { get;  }
+        private readonly IRepositorio _repo;
 
-        public ClienteController(IConfiguration configuration)
+        public ClienteController(IRepositorio repo)
         {
-            Configuration = configuration;
+            _repo = repo;
         }
 
+
+
+
         [HttpGet("GetClientes")]
-        public List<Cliente> GetClientes()
+        public async Task<ActionResult> GetClientes()
         {
+            try
+            {
+               
+                var clientes = await _repo.GetClientes();
+                return Ok(clientes);
+            }
 
-            string? conn = Configuration.GetConnectionString("Default");
-
-            Repositorio repo = new Repositorio(conn);
-
-
-            return repo.GetClientes();
+            catch (Exception ex) {
+                //log error
+                return StatusCode(500, ex.Message);
+            }
+            
         }
 
 
         [HttpPost("PostClientes")]
-        public Cliente PostCliente(
+        public async Task<ActionResult> PostCliente(
             string Nombres,
-            string Aoellidos,
+            string Apellidos,
             int Telefono,
             string Email,
             string Pais
             
           )
         {
-            string? conn = Configuration.GetConnectionString("Default");
-            Repositorio repo = new Repositorio(conn);
+            try
+            {
+                
+                var res = await _repo.AgregarCliente(
 
-            Cliente cliente = new Cliente();
+                    Nombres,
+                    Apellidos,
+                    Telefono,
+                    Email,
+                    Pais
 
-            cliente .Nombres = Nombres;
-            cliente.Apellidos = Aoellidos;
-            cliente.Telefono = Telefono;
-            cliente.Email= Email;   
-            cliente.Pais = Pais;
-           
+                    );
 
 
-            return repo.AgregarCliente(cliente);
+
+                return Ok(res);
+
+             }
+
+             catch (Exception ex)
+                {
+                return StatusCode(500, ex.Message);
+                }
+        }
+
+        [HttpPut("PutClientes")]
+
+        public async Task<IActionResult> UpdateCliente(
+            int IdCliente,
+            string Nombres,
+            string Apellidos,
+            int Telefono,
+            string Email,
+            string Pais,
+            string FechaCreacion
+            )
+        {
+            try {
+
+                await  _repo.ActualizarCliente(
+                IdCliente,
+                Nombres,
+                Apellidos,
+                Telefono,
+                Email,
+                Pais,
+                FechaCreacion
+                );
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
 
         [HttpDelete("DeleteCliente")]
-        public void DeleteCliente(int id)
+        public async Task<ActionResult> DeleteCliente(int id)
         {
+            try
+            {
 
-            string? conn = Configuration.GetConnectionString("Default");
-
-            Repositorio repo = new Repositorio(conn);
+             var res =  await   _repo.BorrarCliente(id);
 
 
-            repo.BorrarCliente(id);
+             return Ok(res);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
 
 
         }
