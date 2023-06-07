@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CrudDapper.Repositorio;
-using CrudDapper.Models;
+﻿using WebApi.Models;
+using WebApi.Servicios.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-
-namespace crudDapper.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class ClienteController : ControllerBase
     {
-        private readonly IRepositorio _repo;
+        private readonly IServicioCliente _servicioCliente;
 
-        public ClienteController(IRepositorio repo)
+
+
+        public ClienteController(IServicioCliente servicioCliente)
         {
-            _repo = repo;
+            _servicioCliente = servicioCliente;
         }
 
 
@@ -24,16 +27,17 @@ namespace crudDapper.Controllers
         {
             try
             {
-               
-                var clientes = await _repo.GetClientes();
+
+                var clientes = await _servicioCliente.GetClientes();
                 return Ok(clientes);
             }
 
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 //log error
                 return StatusCode(500, ex.Message);
             }
-            
+
         }
 
 
@@ -44,13 +48,13 @@ namespace crudDapper.Controllers
             int Telefono,
             string Email,
             string Pais
-            
+
           )
         {
             try
             {
-                
-                var res = await _repo.AgregarCliente(
+
+                var res = await _servicioCliente.AgregarCliente(
 
                     Nombres,
                     Apellidos,
@@ -64,15 +68,15 @@ namespace crudDapper.Controllers
 
                 return Ok(res);
 
-             }
+            }
 
-             catch (Exception ex)
-                {
+            catch (Exception ex)
+            {
                 return StatusCode(500, ex.Message);
-                }
+            }
         }
 
-        [HttpPut("PutClientes")]
+        [HttpPut("PutCliente")]
 
         public async Task<IActionResult> UpdateCliente(
             int IdCliente,
@@ -84,9 +88,10 @@ namespace crudDapper.Controllers
             string FechaCreacion
             )
         {
-            try {
+            try
+            {
 
-                await  _repo.ActualizarCliente(
+                await _servicioCliente.ActualizarCliente(
                 IdCliente,
                 Nombres,
                 Apellidos,
@@ -111,10 +116,10 @@ namespace crudDapper.Controllers
             try
             {
 
-             var res =  await   _repo.BorrarCliente(id);
+                var res = await _servicioCliente.BorrarCliente(id);
 
 
-             return Ok(res);
+                return Ok(res);
             }
 
             catch (Exception ex)

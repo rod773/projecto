@@ -1,10 +1,10 @@
-﻿using CrudDapper.Models;
+﻿using WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
-namespace CrudDapper.Repositorio
+namespace WebApi.Servicios.Interfaces
 {
-    public interface IRepositorio
+    public interface IServicioCliente
     {
         public Task<Cliente> GetCliente(int id);
 
@@ -30,5 +30,8 @@ namespace CrudDapper.Repositorio
             );
 
         public Task<int> BorrarCliente(int id);
+
+
+
     }
 }

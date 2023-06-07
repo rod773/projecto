@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CrudDapper.Models
+namespace WebApi.Models
 {
     public class Cliente
     {

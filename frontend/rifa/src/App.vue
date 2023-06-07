@@ -15,18 +15,32 @@
       ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
     >
     <v-footer dark>
-      <v-layout justify-center> footer </v-layout>
+      <v-layout justify-center
+        ><v-btn light @click="getClientes()">getclientes</v-btn>
+        <v-btn light @click="autenticacion()">auntenticar</v-btn>
+      </v-layout>
     </v-footer>
   </v-app>
 </template>
 
 <script setup lang="ts">
 import "@/styles/style.scss";
+import { useAppStore } from "@/store/appStore";
 import { onMounted, ref } from "vue";
 
 const headertop = ref();
 
 const headerbottom = ref();
+
+const appstore = useAppStore();
+
+const getClientes = () => {
+  appstore.getClientes();
+};
+
+const autenticacion = () => {
+  appstore.autenticacion();
+};
 
 const scrollUp = () => {
   let pos = window.scrollY;

@@ -1,13 +1,15 @@
-﻿using CrudDapper.Models;
+﻿using WebApi.Models;
+using WebApi.Servicios.Interfaces;
+using WebApi.Models;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using System.Text;
 
-namespace CrudDapper.Repositorio
+namespace WebApi.Servicios
 {
-    public class Repositorio : IRepositorio
+    public class ServicioCliente : IServicioCliente
     {
         
 
@@ -16,7 +18,11 @@ namespace CrudDapper.Repositorio
         private readonly IConfiguration _configuration;
 
 
-        public Repositorio(IConfiguration configuration)
+        public IDbConnection CreateConnection() => new MySqlConnection(_connectionString);
+
+
+
+        public ServicioCliente(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("Default");
@@ -24,13 +30,7 @@ namespace CrudDapper.Repositorio
         }
 
 
-        public IDbConnection CreateConnection()=>new MySqlConnection(_connectionString);
-        
-
-
-
-
-
+      
 
         public async Task ActualizarCliente(
             int IdCliente,
@@ -168,5 +168,6 @@ namespace CrudDapper.Repositorio
             }
                 
         }
+
     }
 }
