@@ -9,6 +9,7 @@
       <v-toolbar-title>Menu</v-toolbar-title>
     </v-app-bar>
     <v-content>
+      <loading />
       <router-view></router-view>
     </v-content>
     <v-btn class="btn-up" icon @click="scrollUp()"
@@ -25,6 +26,7 @@
 
 <script setup lang="ts">
 import "@/styles/style.scss";
+import Loading from "@/components/Loading.vue";
 import { useAppStore } from "@/store/appStore";
 import { onMounted, ref } from "vue";
 
