@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly IServicioCliente _servicioCliente;

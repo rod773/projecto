@@ -1,12 +1,18 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
-import apiService from "@/services/apiService";
 import axios from "axios";
 
 export const useAppStore = defineStore("appstore", () => {
-  const getClientes = () => {
-    axios
-      .get("http://localhost:7071/api/Cliente/GetClientes")
+  const token = ref("");
+
+  const getClientes = async () => {
+    await axios
+      .get("http://localhost:7071/api/Cliente/GetClientes", {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token.value}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -22,16 +28,11 @@ export const useAppStore = defineStore("appstore", () => {
     await axios
       .post("http://localhost:7071/api/Autenticacion/Validar", Usuario)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.token);
+        token.value = response.data.token;
       })
       .catch((error) => console.error(error));
   };
 
   return { getClientes, autenticacion };
 });
-
-// export const useAppStore = defineStore("app", {
-//   state: () => ({
-
-//   }),
-// });
