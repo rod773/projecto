@@ -41,14 +41,24 @@
           <v-btn light @click="agregarCliente()">agregar</v-btn>
           <v-btn light @click="autenticacion()">auntenticar</v-btn>
           <v-btn light @click="ingresar()">Ingresar</v-btn>
-          <v-btn color="primary" @click.stop="drawer = !drawer"> Toggle </v-btn>
+          <v-btn
+            outline
+            large
+            color="indigo"
+            icon
+            @click.stop="drawer = !drawer"
+          >
+            <v-icon color="light">mdi-menu</v-icon>
+          </v-btn>
         </v-col>
         <v-col>
           <loading />
         </v-col>
       </v-row>
       <v-row class="ma-0 pa-0">
-        <v-col cols="12" class="parallax"></v-col>
+        <v-col cols="12" class="parallax">
+          <img src="@/assets/img/titulo.svg" alt="" />
+        </v-col>
       </v-row>
       <v-row class="ma-0 pa-0">
         <v-col cols="8" class="col1" />

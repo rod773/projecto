@@ -90,3 +90,7 @@ html {
     background-image: $gradient !important;
     opacity: 0.9;
 }
+
+.v-btn:hover {
+    cursor: pointer;
+}
