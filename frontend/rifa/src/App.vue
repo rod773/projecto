@@ -1,5 +1,27 @@
 <template>
   <v-app>
+    <v-navigation-drawer v-model="drawer" temporary>
+      <v-list-item
+        prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
+        title="John Leider"
+      ></v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list density="compact" nav>
+        <v-list-item
+          prepend-icon="mdi-view-dashboard"
+          title="Home"
+          value="home"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-forum"
+          title="About"
+          value="about"
+        ></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0 row-header" id="headertop">
         <v-col cols="3" class="header header-logo ma-0 pa-0">
@@ -19,6 +41,7 @@
           <v-btn light @click="agregarCliente()">agregar</v-btn>
           <v-btn light @click="autenticacion()">auntenticar</v-btn>
           <v-btn light @click="ingresar()">Ingresar</v-btn>
+          <v-btn color="primary" @click.stop="drawer = !drawer"> Toggle </v-btn>
         </v-col>
         <v-col>
           <loading />
@@ -33,10 +56,11 @@
       </v-row>
     </v-container>
   </v-app>
+
+  <router-view v-if="dialog"></router-view>
   <v-btn class="btn-up" icon @click="scrollUp()"
     ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
   >
-  <router-view v-if="dialog"></router-view>
 </template>
 
 <script setup lang="ts">
@@ -56,6 +80,8 @@ const appstore = useAppStore();
 const { clientenuevo } = storeToRefs(appstore);
 
 const dialog = ref(false);
+
+const drawer = ref(true);
 
 //*********** */
 

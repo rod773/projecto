@@ -85,3 +85,8 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.v-navigation-drawer {
+    background-image: $gradient !important;
+    opacity: 0.9;
+}
