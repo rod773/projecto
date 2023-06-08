@@ -11,7 +11,7 @@ html {
 
 .v-application {
     width: 100%;
-    height: 100vh;
+    height: auto;
     background-color: $pink !important;
     background-image: $gradient !important;
 }
@@ -22,12 +22,21 @@ html {
     height: 100px;
 }
 
+.menu-title {
+    @include flexcenter;
+    .v-btn {
+        margin: 5px;
+    }
+}
+
 #headertop {
     background-color: rgba($indigo, 0.5);
     animation: fadeIn 2s linear;
 }
 
 #headerbottom {
+    position: sticky;
+    top: 0;
     animation: fadeIn 1s linear;
     background-color: rgba($dark, 0.5);
 }
@@ -66,4 +75,13 @@ html {
 .col2 {
     background-color: rgba($dark, 0.5);
     height: 200px;
+}
+
+.parallax {
+    background-image: url("@/assets/img/parallax.jpg");
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

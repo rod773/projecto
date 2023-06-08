@@ -3,7 +3,7 @@
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0 row-header" id="headertop">
         <v-col cols="3" class="header header-logo ma-0 pa-0">
-          <img src="@/assets/logo.png" alt="" />
+          <img src="@/assets/logo/logo.png" alt="" />
         </v-col>
         <v-col cols="9" class="menu-title">
           <v-title class="text-h2">Menu</v-title>
@@ -12,7 +12,7 @@
 
       <v-row class="ma-0 pa-0 row-header" id="headerbottom">
         <v-col cols="3" class="header header-logo ma-0 pa-0">
-          <img src="@/assets/logo.png" alt=""
+          <img src="@/assets/logo/logo.png" alt=""
         /></v-col>
         <v-col cols="9" class="menu-title">
           <v-btn light @click="getClientes()">getclientes</v-btn>
@@ -24,16 +24,18 @@
           <loading />
         </v-col>
       </v-row>
-      <v-btn class="btn-up" icon @click="scrollUp()"
-        ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
-      >
-
+      <v-row class="ma-0 pa-0">
+        <v-col cols="12" class="parallax"></v-col>
+      </v-row>
       <v-row class="ma-0 pa-0">
         <v-col cols="8" class="col1" />
         <v-col cols="4" class="col2" />
       </v-row>
     </v-container>
   </v-app>
+  <v-btn class="btn-up" icon @click="scrollUp()"
+    ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
+  >
   <router-view v-if="dialog"></router-view>
 </template>
 
