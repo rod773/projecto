@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
+import { Cliente } from "@/Interfaces/ICliente";
 import { ClienteNuevo } from "@/Interfaces/IClienteNuevo";
 
 export const useAppStore = defineStore("appstore", () => {

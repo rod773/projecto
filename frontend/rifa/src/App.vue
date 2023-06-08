@@ -1,30 +1,44 @@
 <template>
   <v-app>
-    <v-app-bar id="headertop">
-      <img src="@/assets/logo.png" alt="" />
-      <v-toolbar-title>Menu</v-toolbar-title>
-      <v-btn light @click="getClientes()">getclientes</v-btn>
-      <v-btn light @click="agregarCliente()">agregar</v-btn>
-      <v-btn light @click="autenticacion()">auntenticar</v-btn>
-    </v-app-bar>
-    <v-app-bar id="headerbottom">
-      <img src="@/assets/logo.png" alt="" />
-      <v-toolbar-title>Menu</v-toolbar-title>
-    </v-app-bar>
-    <v-content>
-      <loading />
-      <router-view></router-view>
-    </v-content>
-    <v-btn class="btn-up" icon @click="scrollUp()"
-      ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
-    >
-    <v-footer dark>
-      <v-layout justify-center> </v-layout>
-    </v-footer>
+    <v-container fluid class="ma-0 pa-0">
+      <v-row class="ma-0 pa-0 row-header" id="headertop">
+        <v-col cols="3" class="header header-logo ma-0 pa-0">
+          <img src="@/assets/logo.png" alt="" />
+        </v-col>
+        <v-col cols="9" class="menu-title">
+          <v-title class="text-h2">Menu</v-title>
+        </v-col>
+      </v-row>
+
+      <v-row class="ma-0 pa-0 row-header" id="headerbottom">
+        <v-col cols="3" class="header header-logo ma-0 pa-0">
+          <img src="@/assets/logo.png" alt=""
+        /></v-col>
+        <v-col cols="9" class="menu-title">
+          <v-btn light @click="getClientes()">getclientes</v-btn>
+          <v-btn light @click="agregarCliente()">agregar</v-btn>
+          <v-btn light @click="autenticacion()">auntenticar</v-btn>
+          <v-btn light @click="ingresar()">Ingresar</v-btn>
+        </v-col>
+        <v-col>
+          <loading />
+        </v-col>
+      </v-row>
+      <v-btn class="btn-up" icon @click="scrollUp()"
+        ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
+      >
+
+      <v-row class="ma-0 pa-0">
+        <v-col cols="8" class="col1" />
+        <v-col cols="4" class="col2" />
+      </v-row>
+    </v-container>
   </v-app>
+  <router-view v-if="dialog"></router-view>
 </template>
 
 <script setup lang="ts">
+import "vuetify/styles";
 import "@/styles/style.scss";
 import Loading from "@/components/Loading.vue";
 import { useAppStore } from "@/store/appStore";
@@ -39,6 +53,8 @@ const appstore = useAppStore();
 
 const { clientenuevo } = storeToRefs(appstore);
 
+const dialog = ref(false);
+
 //*********** */
 
 const autenticacion = () => {
@@ -51,6 +67,10 @@ const getClientes = () => {
   appstore.getClientes();
 };
 
+//******************* */
+const ingresar = () => {
+  dialog.value = !dialog.value;
+};
 //******************* */
 
 const agregarCliente = () => {
@@ -90,11 +110,7 @@ window.addEventListener("scroll", () => {
 //*************** */
 
 onMounted(() => {
-  headertop.value = document.querySelector("#headertop");
-  headerbottom.value = document.querySelector("#headerbottom");
   setTimeout(() => {
-    headerbottom.value.style.top = "100px";
-    headertop.value.style.top = "0px";
     document.documentElement.scrollTop = 0;
   }, 100);
 });
