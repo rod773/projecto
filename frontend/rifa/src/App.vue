@@ -91,7 +91,9 @@ const { clientenuevo } = storeToRefs(appstore);
 
 const dialog = ref(false);
 
-const drawer = ref(true);
+const drawer = ref(false);
+
+const svgcontainer = ref();
 
 //*********** */
 
@@ -108,6 +110,8 @@ const getClientes = () => {
 //******************* */
 const ingresar = () => {
   dialog.value = !dialog.value;
+
+  reload();
 };
 //******************* */
 
@@ -120,6 +124,20 @@ const agregarCliente = () => {
   appstore.agregarCliente();
 };
 
+//****************** */
+const reload = () => {
+  svgcontainer.value = document.querySelector(".svg-container");
+  svgcontainer.value.style.display = "block";
+  svgcontainer.value.style.opacity = "0";
+  svgcontainer.value.style.visibility = "hidden";
+  setTimeout(() => {
+    svgcontainer.value.style.opacity = "1";
+    svgcontainer.value.style.visibility = "visible";
+  }, 500);
+  setTimeout(() => {
+    svgcontainer.value.style.display = "none";
+  }, 5000);
+};
 //****************** */
 
 const scrollUp = () => {
