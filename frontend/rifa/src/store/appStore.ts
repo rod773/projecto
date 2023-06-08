@@ -1,9 +1,19 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
+import { ClienteNuevo } from "@/Interfaces/IClienteNuevo";
 
 export const useAppStore = defineStore("appstore", () => {
   const token = ref("");
+
+  const clientenuevo = ref<ClienteNuevo>({
+    Nombres: "",
+    Apellidos: "",
+    Email: "",
+    Clave: "",
+  });
+
+  //********************** */
 
   const getClientes = async () => {
     await axios
@@ -19,6 +29,8 @@ export const useAppStore = defineStore("appstore", () => {
       .catch((error) => console.error(error));
   };
 
+  //*********************** */
+
   const agregarCliente = async () => {
     const instance = axios.create({
       baseURL: "http://localhost:7071/api/Cliente",
@@ -28,18 +40,21 @@ export const useAppStore = defineStore("appstore", () => {
         Authorization: `Bearer ${token.value}`,
       },
     });
+
     await instance
       .post("PostCliente", {
-        Nombres: "diego",
-        Apellidos: "perez",
-        Email: "diego@gmail.com",
-        Clave: "abc17890",
+        Nombres: clientenuevo.value.Nombres,
+        Apellidos: clientenuevo.value.Apellidos,
+        Email: clientenuevo.value.Email,
+        Clave: clientenuevo.value.Clave,
       })
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => console.error(error));
   };
+
+  //************************* */
 
   const autenticacion = async () => {
     const Usuario = {
@@ -56,5 +71,7 @@ export const useAppStore = defineStore("appstore", () => {
       .catch((error) => console.error(error));
   };
 
-  return { agregarCliente, getClientes, autenticacion };
+  //*********************** */
+
+  return { clientenuevo, agregarCliente, getClientes, autenticacion };
 });
