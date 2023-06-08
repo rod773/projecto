@@ -19,6 +19,28 @@ export const useAppStore = defineStore("appstore", () => {
       .catch((error) => console.error(error));
   };
 
+  const agregarCliente = async () => {
+    const instance = axios.create({
+      baseURL: "http://localhost:7071/api/Cliente",
+      timeout: 1000,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token.value}`,
+      },
+    });
+    await instance
+      .post("PostCliente", {
+        Nombres: "diego",
+        Apellidos: "perez",
+        Email: "diego@gmail.com",
+        Clave: "abc17890",
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
   const autenticacion = async () => {
     const Usuario = {
       correo: "c@gmail.com",
@@ -34,5 +56,5 @@ export const useAppStore = defineStore("appstore", () => {
       .catch((error) => console.error(error));
   };
 
-  return { getClientes, autenticacion };
+  return { agregarCliente, getClientes, autenticacion };
 });

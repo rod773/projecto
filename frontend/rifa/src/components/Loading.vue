@@ -58,11 +58,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   display: block;
-  background-image: linear-gradient(
-    180deg,
-    rgba(#212529, 1),
-    rgba(#6610f2, 0.3)
-  );
+  background-image: linear-gradient(180deg, rgba(#212529, 1), rgba(#6610f2, 1));
 }
 
 svg {

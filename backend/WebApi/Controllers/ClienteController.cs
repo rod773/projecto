@@ -41,28 +41,14 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost("PostClientes")]
-        public async Task<ActionResult> PostCliente(
-            string Nombres,
-            string Apellidos,
-            int Telefono,
-            string Email,
-            string Pais
-
-          )
+        [HttpPost("PostCliente")]
+        public async Task<ActionResult> PostCliente([FromBody] ClienteNuevo clientenuevo)
         {
             try
             {
 
-                var res = await _servicioCliente.AgregarCliente(
 
-                    Nombres,
-                    Apellidos,
-                    Telefono,
-                    Email,
-                    Pais
-
-                    );
+                var res = await _servicioCliente.AgregarCliente(clientenuevo);
 
 
 
@@ -78,28 +64,12 @@ namespace WebApi.Controllers
 
         [HttpPut("PutCliente")]
 
-        public async Task<IActionResult> UpdateCliente(
-            int IdCliente,
-            string Nombres,
-            string Apellidos,
-            int Telefono,
-            string Email,
-            string Pais,
-            string FechaCreacion
-            )
+        public async Task<IActionResult> UpdateCliente(Cliente cliente)
         {
             try
             {
 
-                await _servicioCliente.ActualizarCliente(
-                IdCliente,
-                Nombres,
-                Apellidos,
-                Telefono,
-                Email,
-                Pais,
-                FechaCreacion
-                );
+                await _servicioCliente.ActualizarCliente(cliente);
 
                 return NoContent();
             }

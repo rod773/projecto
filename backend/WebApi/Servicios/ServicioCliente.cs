@@ -32,16 +32,7 @@ namespace WebApi.Servicios
 
       
 
-        public async Task ActualizarCliente(
-            int IdCliente,
-            string Nombres,
-            string Apellidos,
-            int Telefono,
-            string Email,
-            string Pais,
-            string FechaCreacion
-
-            )
+        public async Task ActualizarCliente(Cliente cliente)
         {
             using(var  conn = CreateConnection()) { 
             
@@ -49,12 +40,8 @@ namespace WebApi.Servicios
 
             sb.AppendLine("update cliente set Nombres=@Nombres,");
             sb.AppendLine("Apellidos=@Apellidos,");
-            sb.AppendLine("Telefono=@Telefono,");
             sb.AppendLine("Email = @Email,");
-            sb.AppendLine("Pais = @Pais,");
-            sb.AppendLine("fechaCreacion = STR_TO_DATE(");
-            sb.AppendLine("@FechaCreacion");
-            sb.AppendLine(", '%Y-%m-%d')  ");
+            sb.AppendLine("Clave = md5(@Clave) ");
             sb.AppendLine("where idcliente = @IdCliente");
 
             var sql = sb.ToString ();
@@ -62,37 +49,28 @@ namespace WebApi.Servicios
             var res = await conn.ExecuteAsync(
             sql, 
             new {
-                @IdCliente = IdCliente,
-                @Nombres = Nombres,
-                @Apellidos = Apellidos,
-                @Telefono = Telefono,
-                @Email = Email,
-                @Pais = Pais,
-                @FechaCreacion = FechaCreacion,
+                @IdCliente = cliente.IdCliente,
+                @Nombres = cliente.Nombres,
+                @Apellidos = cliente.Apellidos,
+                @Email = cliente.Email,
+                @Clave = cliente.Clave,
+               
             });
-
-
-              
+  
             
             }
 
             
         }
 
-        public async Task<Cliente> AgregarCliente(
-
-            string Nombres,
-            string Apellidos,
-            int Telefono,
-            string Email,
-            string Pais
-
-            )
+        public async Task<Cliente> AgregarCliente(ClienteNuevo clientenuevo)  
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("insert into cliente (Nombres, Apellidos, Telefono, Email, Pais, fechaCreacion) ");
-            sb.AppendLine("values(@Nombres, @Apellidos, @Telefono, @Email, @Pais, CURRENT_TIMESTAMP);") ;
+            
+
+            sb.AppendLine("insert into cliente (Nombres, Apellidos, Email, Clave) ");
+            sb.AppendLine("values(@Nombres, @Apellidos, @Email, md5(@Clave));") ;
             sb.AppendLine("SELECT LAST_INSERT_ID();") ;
             var sql = sb.ToString();
 
@@ -100,25 +78,21 @@ namespace WebApi.Servicios
             
             var res =  await conn.QuerySingleAsync<int>(sql, new
             {
-                @Nombres = Nombres,
-                @Apellidos = Apellidos,
-                @Telefono = Telefono,  
-                @Email = Email,
-                @Pais = Pais,
+                @Nombres = clientenuevo.Nombres,
+                @Apellidos = clientenuevo.Apellidos,
+                @Email = clientenuevo.Email,
+                @Clave = clientenuevo.Clave,
+                
             });
 
+                Cliente cliente = new Cliente();
 
-
-                var cliente = new Cliente
-                {
-                    IdCliente = res,
-                    Nombres = Nombres,
-                    Apellidos = Apellidos,
-                    Telefono= Telefono,
-                    Email = Email,
-                    Pais = Pais,
-                    FechaCreacion= DateTime.Now,    
-                };
+                cliente.IdCliente = res;
+                cliente.Nombres = clientenuevo.Nombres;
+                cliente.Apellidos = clientenuevo.Apellidos;
+                cliente.Email = clientenuevo.Email;
+                cliente.Clave = clientenuevo.Clave;
+               
                 return cliente;
             }
 

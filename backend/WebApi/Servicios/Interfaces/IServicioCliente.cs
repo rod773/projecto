@@ -10,24 +10,9 @@ namespace WebApi.Servicios.Interfaces
 
         public Task<IEnumerable<Cliente>> GetClientes();
 
-        public Task<Cliente> AgregarCliente(
-            string Nombres,
-            string Apellidos,
-            int Telefono,
-            string Email,
-            string Pais
+        public Task<Cliente> AgregarCliente(ClienteNuevo clientenuevo);
 
-            );
-
-        public Task ActualizarCliente(
-            int IdCliente,
-            string Nombres,
-            string Apellidos,
-            int Telefono,
-            string Email,
-            string Pais,
-            string FechaCreacion
-            );
+        public Task ActualizarCliente(Cliente cliente);
 
         public Task<int> BorrarCliente(int id);
 

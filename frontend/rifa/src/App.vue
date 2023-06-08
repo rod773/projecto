@@ -19,6 +19,7 @@
       <v-layout justify-center
         ><v-btn light @click="getClientes()">getclientes</v-btn>
         <v-btn light @click="autenticacion()">auntenticar</v-btn>
+        <v-btn light @click="agregarCliente()">agregar</v-btn>
       </v-layout>
     </v-footer>
   </v-app>
@@ -42,6 +43,10 @@ const getClientes = () => {
 
 const autenticacion = () => {
   appstore.autenticacion();
+};
+
+const agregarCliente = () => {
+  appstore.agregarCliente();
 };
 
 const scrollUp = () => {
