@@ -11,22 +11,48 @@
       prepend-icon="mdi-view-dashboard"
       title="Inicio"
       value="inicio"
-    ></v-list-item>
+      :to="{
+        name: 'inicio',
+        params: {
+          id: 'inicio',
+        },
+      }"
+    >
+    </v-list-item>
     <v-list-item
       prepend-icon="mdi-forum"
       title="Acerca de"
       value="acercade"
+      :to="{
+        name: 'acercade',
+        params: {
+          id: 'acercade',
+        },
+      }"
     ></v-list-item>
     <v-list-item
       prepend-icon="mdi-view-dashboard"
-      title="Inicio"
-      value="inicio"
+      title="Blog"
+      value="blog"
+      :to="{
+        name: 'blog',
+        params: {
+          id: 'blog',
+        },
+      }"
     ></v-list-item>
     <v-list-item
       prepend-icon="mdi-forum"
-      title="Acerca de"
-      value="acercade"
-    ></v-list-item>
+      title="Contacto"
+      value="contacto"
+      :to="{
+        name: 'contacto',
+        params: {
+          id: 'contacto',
+        },
+      }"
+    >
+    </v-list-item>
   </v-list>
 </template>
 
