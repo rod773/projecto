@@ -1,31 +1,8 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" temporary>
-      <SideNav />
-    </v-navigation-drawer>
-    <LoginForm />
-    <RegisterForm />
-
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0 row-header" id="headertop">
-        <v-col cols="3" class="header header-logo ma-0 pa-0">
-          <img src="@/assets/logo/logo.png" alt="" />
-        </v-col>
-
-        <v-col cols="9" class="menu-btn">
-          <v-btn light @click="ingresar()">Ingreso</v-btn>
-          <v-btn light @click="registro()">Registro</v-btn>
-        </v-col>
-      </v-row>
-
-      <v-row class="ma-0 pa-0 row-header" id="headerbottom">
-        <v-col cols="3" class="header header-logo ma-0 pa-0">
-          <img src="@/assets/logo/logo.png" alt=""
-        /></v-col>
-        <v-col cols="9" class="menu-btn">
-          <v-btn light @click="getClientes()">getclientes</v-btn>
-          <v-btn light @click="agregarCliente()">agregar</v-btn>
-          <v-btn light @click="autenticacion()">auntenticar</v-btn>
+        <v-col cols="3" class="header header-nav ma-0 pa-0">
           <v-btn
             outline
             large
@@ -36,10 +13,29 @@
             <v-icon color="light">mdi-menu</v-icon>
           </v-btn>
         </v-col>
+
+        <v-col cols="9" class="menu-btn">
+          <v-btn light @click="ingresar()">Ingreso</v-btn>
+          <v-btn light @click="registro()">Registro</v-btn>
+          <v-btn light @click="leerqr()">Leer QR</v-btn>
+        </v-col>
+      </v-row>
+      <v-row class="ma-0 pa-0 row-header" id="headerbottom">
+        <v-col cols="3" class="header header-logo ma-0 pa-0">
+          <img src="@/assets/logo/logo.png" alt=""
+        /></v-col>
+        <v-col cols="9" class="menu-btn">
+          <v-btn light @click="getClientes()">getclientes</v-btn>
+          <v-btn light @click="agregarCliente()">agregar</v-btn>
+          <v-btn light @click="autenticacion()">auntenticar</v-btn>
+        </v-col>
         <v-col>
           <loading />
         </v-col>
       </v-row>
+    </v-container>
+
+    <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0">
         <v-col cols="12" class="parallax">
           <img src="@/assets/img/titulo.svg" alt="" />
@@ -50,12 +46,21 @@
         <v-col cols="4" class="col2" />
       </v-row>
     </v-container>
+    <v-container>
+      <router-view></router-view>
+      <v-btn class="btn-up" icon @click="scrollUp()"
+        ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
+      >
+    </v-container>
+    <v-container fluid class="ma-0 pa-0 elem">
+      <v-navigation-drawer v-model="drawer" temporary>
+        <SideNav />
+      </v-navigation-drawer>
+      <LoginForm />
+      <RegisterForm />
+      <LectorQR />
+    </v-container>
   </v-app>
-
-  <router-view v-if="dialog"></router-view>
-  <v-btn class="btn-up" icon @click="scrollUp()"
-    ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
-  >
 </template>
 
 <script setup lang="ts">
@@ -64,6 +69,7 @@ import "@/styles/style.scss";
 import SideNav from "@/components/SideNav.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
+import LectorQR from "@/components/LectorQR.vue";
 import Loading from "@/components/Loading.vue";
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
@@ -80,6 +86,8 @@ const { clientenuevo } = storeToRefs(appstore);
 const { dialog } = storeToRefs(appstore);
 
 const { dialogreg } = storeToRefs(appstore);
+
+const { lectorqr } = storeToRefs(appstore);
 
 const drawer = ref(false);
 
@@ -106,6 +114,13 @@ const ingresar = () => {
 
 const registro = () => {
   dialogreg.value = !dialogreg.value;
+
+  reload();
+};
+//******************* */
+
+const leerqr = () => {
+  lectorqr.value = !lectorqr.value;
 
   reload();
 };

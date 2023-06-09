@@ -50,6 +50,12 @@ html {
     }
 }
 
+.header-nav {
+    height: 100px;
+    @include flexcenter();
+    justify-content: center;
+}
+
 @keyframes fadeIn {
     0% {
         visibility: hidden;
