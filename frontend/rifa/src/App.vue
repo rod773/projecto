@@ -2,7 +2,7 @@
   <v-app>
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0 row-header" id="headertop">
-        <v-col cols="3" class="header header-logo ma-0 pa-0">
+        <v-col cols="3" class="header header-nav ma-0 pa-0">
           <v-btn
             outline
             large
@@ -22,15 +22,15 @@
       </v-row>
 
       <v-row class="ma-0 pa-0 row-header" id="headerbottom">
-        <v-col cols="3" class="header header-nav ma-0 pa-0">
+        <v-col cols="3" class="header header-logo ma-0 pa-0">
           <v-btn
             outline
             large
-            color="indigo"
+            color="transparent"
             icon
             @click.stop="drawer = !drawer"
           >
-            <img src="@/assets/logo/logo.png" alt="" />
+            <img src="@/assets/logo/logo_1.svg" alt="" />
           </v-btn>
         </v-col>
         <v-col cols="9" class="menu-btn">
@@ -54,7 +54,13 @@
     </v-container>
     <v-container>
       <router-view></router-view>
-      <v-btn class="btn-up" icon @click="scrollUp()"
+      <v-btn
+        class="btn-up"
+        @click="scrollUp()"
+        outline
+        large
+        color="indigo"
+        icon
         ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
       >
     </v-container>
@@ -160,7 +166,7 @@ const scrollUp = () => {
   let pos = window.scrollY;
   let interval = setInterval(() => {
     pos = document.documentElement.scrollTop = pos - 2;
-    if (pos < 100) clearInterval(interval);
+    if (pos < 2) clearInterval(interval);
   }, 1);
 };
 

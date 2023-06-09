@@ -51,15 +51,12 @@ html {
 .header-logo {
     @include flexcenter;
     img {
-        height: 50px;
-        @include flexcenter();
+        height: 100px;
     }
 }
 
 .header-nav {
-    height: 100px;
     @include flexcenter();
-    justify-content: center;
 }
 
 @keyframes fadeIn {
@@ -75,9 +72,16 @@ html {
 }
 
 .btn-up {
+    a {
+        display: block;
+    }
+
     position: fixed !important;
     bottom: 100px;
     right: 50px;
+    :hover {
+        transform: scale(1.1);
+    }
 }
 
 .col1 {
