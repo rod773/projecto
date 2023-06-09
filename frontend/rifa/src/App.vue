@@ -2,7 +2,7 @@
   <v-app>
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0 row-header" id="headertop">
-        <v-col cols="3" class="header header-nav ma-0 pa-0">
+        <v-col cols="3" class="header header-logo ma-0 pa-0">
           <v-btn
             outline
             large
@@ -10,7 +10,7 @@
             icon
             @click.stop="drawer = !drawer"
           >
-            <v-icon color="light">mdi-menu</v-icon>
+            <v-icon>mdi-menu</v-icon>
           </v-btn>
         </v-col>
 
@@ -20,17 +20,23 @@
           <v-btn light @click="leerqr()">Leer QR</v-btn>
         </v-col>
       </v-row>
+
       <v-row class="ma-0 pa-0 row-header" id="headerbottom">
-        <v-col cols="3" class="header header-logo ma-0 pa-0">
-          <img src="@/assets/logo/logo.png" alt=""
-        /></v-col>
-        <v-col cols="9" class="menu-btn">
-          <v-btn light @click="getClientes()">getclientes</v-btn>
-          <v-btn light @click="agregarCliente()">agregar</v-btn>
-          <v-btn light @click="autenticacion()">auntenticar</v-btn>
+        <v-col cols="3" class="header header-nav ma-0 pa-0">
+          <v-btn
+            outline
+            large
+            color="indigo"
+            icon
+            @click.stop="drawer = !drawer"
+          >
+            <img src="@/assets/logo/logo.png" alt="" />
+          </v-btn>
         </v-col>
-        <v-col>
-          <loading />
+        <v-col cols="9" class="menu-btn">
+          <!-- <v-btn light @click="getClientes()">getclientes</v-btn>
+          <v-btn light @click="agregarCliente()">agregar</v-btn>
+          <v-btn light @click="autenticacion()">auntenticar</v-btn> -->
         </v-col>
       </v-row>
     </v-container>
@@ -53,6 +59,9 @@
       >
     </v-container>
     <v-container fluid class="ma-0 pa-0 elem">
+      <v-col>
+        <loading />
+      </v-col>
       <v-navigation-drawer v-model="drawer" temporary>
         <SideNav />
       </v-navigation-drawer>
@@ -74,10 +83,6 @@ import Loading from "@/components/Loading.vue";
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
-
-const headertop = ref();
-
-const headerbottom = ref();
 
 const appstore = useAppStore();
 
@@ -160,21 +165,6 @@ const scrollUp = () => {
 };
 
 //************* */
-
-window.addEventListener("scroll", () => {
-  let pos = window.scrollY;
-  if (pos > 100) {
-    headertop.value.style.display = "none";
-    headerbottom.value.style.top = 0;
-  } else {
-    headertop.value.style.display = "block";
-    headerbottom.value.style.top = "100px";
-    headerbottom.value.style.display = "none";
-    setTimeout(() => (headerbottom.value.style.display = "block"), 500);
-  }
-});
-
-//*************** */
 
 onMounted(() => {
   setTimeout(() => {
