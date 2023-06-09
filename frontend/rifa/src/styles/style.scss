@@ -17,13 +17,14 @@ html {
 }
 
 .header,
-.menu-title,
+.menu-btn,
 .row-header {
     height: 100px;
 }
 
-.menu-title {
+.menu-btn {
     @include flexcenter;
+    justify-content: end;
     .v-btn {
         margin: 5px;
     }

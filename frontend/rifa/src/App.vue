@@ -1,34 +1,20 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" temporary>
-      <v-list-item
-        prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-        title="John Leider"
-      ></v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list density="compact" nav>
-        <v-list-item
-          prepend-icon="mdi-view-dashboard"
-          title="Home"
-          value="home"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-forum"
-          title="About"
-          value="about"
-        ></v-list-item>
-      </v-list>
+      <SideNav />
     </v-navigation-drawer>
+    <LoginForm />
+    <RegisterForm />
 
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0 row-header" id="headertop">
         <v-col cols="3" class="header header-logo ma-0 pa-0">
           <img src="@/assets/logo/logo.png" alt="" />
         </v-col>
-        <v-col cols="9" class="menu-title">
-          <v-title class="text-h2">Menu</v-title>
+
+        <v-col cols="9" class="menu-btn">
+          <v-btn light @click="ingresar()">Ingreso</v-btn>
+          <v-btn light @click="registro()">Registro</v-btn>
         </v-col>
       </v-row>
 
@@ -36,11 +22,10 @@
         <v-col cols="3" class="header header-logo ma-0 pa-0">
           <img src="@/assets/logo/logo.png" alt=""
         /></v-col>
-        <v-col cols="9" class="menu-title">
+        <v-col cols="9" class="menu-btn">
           <v-btn light @click="getClientes()">getclientes</v-btn>
           <v-btn light @click="agregarCliente()">agregar</v-btn>
           <v-btn light @click="autenticacion()">auntenticar</v-btn>
-          <v-btn light @click="ingresar()">Ingresar</v-btn>
           <v-btn
             outline
             large
@@ -76,6 +61,9 @@
 <script setup lang="ts">
 import "vuetify/styles";
 import "@/styles/style.scss";
+import SideNav from "@/components/SideNav.vue";
+import LoginForm from "@/components/LoginForm.vue";
+import RegisterForm from "@/components/RegisterForm.vue";
 import Loading from "@/components/Loading.vue";
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
@@ -89,7 +77,9 @@ const appstore = useAppStore();
 
 const { clientenuevo } = storeToRefs(appstore);
 
-const dialog = ref(false);
+const { dialog } = storeToRefs(appstore);
+
+const { dialogreg } = storeToRefs(appstore);
 
 const drawer = ref(false);
 
@@ -110,6 +100,12 @@ const getClientes = () => {
 //******************* */
 const ingresar = () => {
   dialog.value = !dialog.value;
+  reload();
+};
+//******************* */
+
+const registro = () => {
+  dialogreg.value = !dialogreg.value;
 
   reload();
 };

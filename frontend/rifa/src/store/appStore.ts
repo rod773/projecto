@@ -7,6 +7,10 @@ import { ClienteNuevo } from "@/Interfaces/IClienteNuevo";
 export const useAppStore = defineStore("appstore", () => {
   const token = ref("");
 
+  const dialog = ref(false);
+
+  const dialogreg = ref(false);
+
   const clientenuevo = ref<ClienteNuevo>({
     Nombres: "",
     Apellidos: "",
@@ -74,5 +78,12 @@ export const useAppStore = defineStore("appstore", () => {
 
   //*********************** */
 
-  return { clientenuevo, agregarCliente, getClientes, autenticacion };
+  return {
+    dialog,
+    dialogreg,
+    clientenuevo,
+    agregarCliente,
+    getClientes,
+    autenticacion,
+  };
 });

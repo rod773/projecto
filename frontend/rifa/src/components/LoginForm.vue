@@ -1,51 +1,74 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center" dense>
-      <v-col cols="12" sm="8" md="4" lg="4">
-        <v-card elevation="0">
-          <div class="text-center">
-            <h1 class="mb-2">Login</h1>
-          </div>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                label="Indroduce el email"
-                name="email"
-                prepend-inner-icon="mdi-email"
-                type="email"
-                class="rounded-0"
-                outlined
-              ></v-text-field>
-              <v-text-field
-                label="Introduce una clave"
-                name="password"
-                prepend-inner-icon="mdi-lock"
-                type="password"
-                suffix="| Forgot?"
-                class="rounded-0"
-                outlined
-              ></v-text-field>
-              <v-btn class="rounded-0" color="#000000" x-large block dark
-                >Login</v-btn
+  <v-dialog v-model="dialog">
+    <v-container class="d-flex justify-center" width="100%">
+      <v-card width="500" color="teal" theme="dark">
+        <v-card-title>
+          <div class="text-h5 text-center font-weight-light">Ingresar</div>
+        </v-card-title>
+
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              label="Indroduce el email"
+              name="email"
+              prepend-inner-icon="mdi-email"
+              type="email"
+              class="rounded-0"
+              outlined
+              clearable
+            ></v-text-field>
+
+            <v-text-field
+              label="Introduce una clave"
+              name="password"
+              prepend-inner-icon="mdi-lock"
+              type="password"
+              class="rounded-0"
+              outlined
+              clearable
+            ></v-text-field>
+            <v-divider></v-divider>
+
+            <div class="pa-4 text-center">
+              <v-btn
+                min-height="50"
+                rounded
+                variant="outlined"
+                class="bg-cyan"
+                width="50%"
+                >Ingresar</v-btn
               >
-              <v-card-actions class="text--secondary">
-                <v-checkbox color="#000000" label="Remember me"></v-checkbox>
-                <v-spacer></v-spacer>
-                <!-- <router-link :to="{ name: 'SignUp' }">Sign Up</router-link> -->
-                No account?
-                <a href="#" class="pl-2" style="color: #000000">Sign Up</a>
-              </v-card-actions>
-            </v-form>
-          </v-card-text>
-          <v-card-actions class="ml-6 mr-6 text-center">
-            <p>By continuing, you agree to Fedorae Education's</p>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+            </div>
+          </v-form>
+        </v-card-text>
+        <v-card-actions class="ml-6 mr-6 text-center">
+          <v-divider></v-divider>
+
+          <div class="pa-4 text-end">
+            <v-btn
+              class="bg-secondary"
+              min-width="92"
+              rounded
+              variant="outlined"
+              @click="dialog = false"
+            >
+              Close
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
+    </v-container>
+  </v-dialog>
+  >
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAppStore } from "@/store/appStore";
+import { storeToRefs } from "pinia";
+
+const appstore = useAppStore();
+
+const { dialog } = storeToRefs(appstore);
+</script>
 
 <style scoped lang="scss"></style>
