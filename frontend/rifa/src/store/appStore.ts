@@ -10,7 +10,7 @@ export const useAppStore = defineStore("appstore", () => {
 
   const autenticado = ref(false);
 
-  const dialog = ref(false);
+  const dialogLogin = ref(false);
 
   const dialogreg = ref(false);
 
@@ -86,8 +86,14 @@ export const useAppStore = defineStore("appstore", () => {
       .then((response) => {
         console.log(response.data.token);
         token.value = response.data.token;
+        autenticado.value = true;
+        dialogLogin.value = false;
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        autenticado.value = false;
+        dialogLogin.value = true;
+      });
   };
 
   //*********************** */
@@ -98,7 +104,7 @@ export const useAppStore = defineStore("appstore", () => {
     crearqr,
     imageqr,
     lectorqr,
-    dialog,
+    dialogLogin,
     dialogreg,
     clientenuevo,
     agregarCliente,

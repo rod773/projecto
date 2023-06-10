@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialogLogin">
     <v-container class="d-flex justify-center" width="100%">
       <v-card width="500" color="teal" theme="dark">
         <v-card-title>
@@ -54,7 +54,7 @@
               min-width="92"
               rounded
               variant="outlined"
-              @click="dialog = false"
+              @click="dialogLogin = !autenticado"
             >
               Close
             </v-btn>
@@ -73,7 +73,7 @@ import { ref } from "vue";
 
 const appstore = useAppStore();
 
-const { dialog } = storeToRefs(appstore);
+const { dialogLogin, autenticado } = storeToRefs(appstore);
 
 //*************** */
 

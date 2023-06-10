@@ -95,7 +95,7 @@ import { onMounted, ref } from "vue";
 
 const appstore = useAppStore();
 
-const { clientenuevo, dialog, dialogreg, lectorqr, crearqr } =
+const { clientenuevo, dialogLogin, dialogreg, lectorqr, crearqr } =
   storeToRefs(appstore);
 
 //**************************************** */
@@ -118,7 +118,7 @@ const getClientes = () => {
 
 //******************* */
 const ingresar = () => {
-  dialog.value = !dialog.value;
+  dialogLogin.value = !dialogLogin.value;
   reload();
 };
 //******************* */
