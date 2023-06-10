@@ -10,6 +10,7 @@
           <v-form>
             <v-text-field
               label="Indroduce el email"
+              v-model="email"
               name="email"
               prepend-inner-icon="mdi-email"
               type="email"
@@ -20,6 +21,7 @@
 
             <v-text-field
               label="Introduce una clave"
+              v-model="password"
               name="password"
               prepend-inner-icon="mdi-lock"
               type="password"
@@ -30,12 +32,14 @@
             <v-divider></v-divider>
 
             <div class="pa-4 text-center">
+              <!-- <v-btn light @click="autenticar()">auntenticar</v-btn> -->
               <v-btn
                 min-height="50"
                 rounded
                 variant="outlined"
                 class="bg-cyan"
                 width="50%"
+                @click="autenticar(email, password)"
                 >Ingresar</v-btn
               >
             </div>
@@ -65,10 +69,24 @@
 <script setup lang="ts">
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
 const appstore = useAppStore();
 
 const { dialog } = storeToRefs(appstore);
+
+//*************** */
+
+const email = ref("");
+const password = ref("");
+
+//*********** */
+
+const autenticar = (email: string, password: string) => {
+  appstore.autenticar(email, password);
+};
+
+//************* */
 </script>
 
 <style scoped lang="scss"></style>

@@ -3,9 +3,12 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { Cliente } from "@/Interfaces/ICliente";
 import { ClienteNuevo } from "@/Interfaces/IClienteNuevo";
+import { Usuario } from "@/Interfaces/IUsuario";
 
 export const useAppStore = defineStore("appstore", () => {
   const token = ref("");
+
+  const autenticado = ref(false);
 
   const dialog = ref(false);
 
@@ -22,6 +25,11 @@ export const useAppStore = defineStore("appstore", () => {
     Apellidos: "",
     Email: "",
     Clave: "",
+  });
+
+  const usuario = ref<Usuario>({
+    correo: "",
+    clave: "",
   });
 
   //********************** */
@@ -67,14 +75,14 @@ export const useAppStore = defineStore("appstore", () => {
 
   //************************* */
 
-  const autenticacion = async () => {
-    const Usuario = {
-      correo: "c@gmail.com",
-      clave: "123",
+  const autenticar = async (email: string, password: string) => {
+    usuario.value = {
+      correo: email,
+      clave: password,
     };
 
     await axios
-      .post("http://localhost:7071/api/Autenticacion/Validar", Usuario)
+      .post("http://localhost:7071/api/Autenticacion/Validar", usuario.value)
       .then((response) => {
         console.log(response.data.token);
         token.value = response.data.token;
@@ -85,6 +93,8 @@ export const useAppStore = defineStore("appstore", () => {
   //*********************** */
 
   return {
+    autenticado,
+    autenticar,
     crearqr,
     imageqr,
     lectorqr,
@@ -93,6 +103,5 @@ export const useAppStore = defineStore("appstore", () => {
     clientenuevo,
     agregarCliente,
     getClientes,
-    autenticacion,
   };
 });

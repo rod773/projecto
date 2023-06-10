@@ -35,9 +35,9 @@
           </v-btn>
         </v-col>
         <v-col cols="9" class="menu-btn">
-          <!-- <v-btn light @click="getClientes()">getclientes</v-btn>
+          <v-btn light @click="getClientes()">getclientes</v-btn>
           <v-btn light @click="agregarCliente()">agregar</v-btn>
-          <v-btn light @click="autenticacion()">auntenticar</v-btn> -->
+          <!-- <v-btn light @click="autenticar()">auntenticar</v-btn> -->
         </v-col>
       </v-row>
     </v-container>
@@ -106,8 +106,8 @@ const svgcontainer = ref();
 
 //*********** */
 
-const autenticacion = () => {
-  appstore.autenticacion();
+const autenticar = (email: string, password: string) => {
+  appstore.autenticar(email, password);
 };
 
 //************* */

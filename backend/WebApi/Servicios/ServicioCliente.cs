@@ -1,12 +1,10 @@
 ﻿using WebApi.Models;
 using WebApi.Servicios.Interfaces;
-using WebApi.Models;
 using Dapper;
-using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using System.Text;
-using System.Collections.Generic;
+
 
 namespace WebApi.Servicios
 {

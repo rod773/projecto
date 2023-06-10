@@ -44,9 +44,7 @@
                       theme="dark"
                     >
                       <router-link to="premios" class="mx-5">
-                        <span class="text-h4" @click="lectorqr = false"
-                          >premios</span
-                        >
+                        <span class="text-h4" @click="onClose">premios</span>
                       </router-link>
                       <v-btn
                         x-small
