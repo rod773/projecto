@@ -7,7 +7,18 @@
             Crear Imagen QR
           </div>
         </v-card-title>
-        <v-card-text> </v-card-text>
+        <v-card-text id="codigo">
+          <v-text-field v-model="urlText" clearable> </v-text-field>
+          <v-div class="d-flex justify-center">
+            <vue-qrious
+              v-if="urlText"
+              :value="urlText"
+              @change="onDataChange"
+              :size="300"
+            >
+            </vue-qrious
+          ></v-div>
+        </v-card-text>
 
         <v-divider></v-divider>
         <v-card-actions>
@@ -20,7 +31,7 @@
                 variant="outlined"
                 @click="handleClickCrearQR"
               >
-                Crear QR
+                Guardar
               </v-btn>
             </v-col>
             <v-col cols="6" class="d-flex justify-center align-center">
@@ -45,19 +56,35 @@
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import VueQrious from "vue-qrious";
+import vueQr from "vue-qr/src/packages/vue-qr.vue";
 
 const appstore = useAppStore();
 
 const { crearqr } = storeToRefs(appstore);
 
 //************************* */
+const imagenqr = ref();
+
+const urlText = ref("");
+
+const codigo = ref();
 
 //************************* */
-const handleClickCrearQR = ref();
+const handleClickCrearQR = () => {
+  codigo.value = document.querySelector("#codigo img");
+  console.dir(codigo.value.src);
+  const enlace = document.createElement("a");
+  enlace.href = codigo.value.src;
+  enlace.download = "Código QR generado.png";
+  enlace.click();
+};
 
 //************************ */
 
-const onDataChange = () => {};
+const onDataChange = () => {
+  console.log(urlText.value);
+};
 //************************ */
 </script>
 

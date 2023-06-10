@@ -139,7 +139,7 @@ const leerqr = () => {
 
 const crearQR = () => {
   crearqr.value = !crearqr.value;
-  console.log(crearqr.value);
+
   reload();
 };
 //******************* */
