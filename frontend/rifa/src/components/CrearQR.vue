@@ -10,13 +10,13 @@
         <v-card-text id="codigo">
           <v-text-field v-model="urlText" clearable> </v-text-field>
           <v-div class="d-flex justify-center">
-            <vue-qrious
+            <vue-qr
               v-if="urlText"
-              :value="urlText"
+              :text="urlText"
               @change="onDataChange"
               :size="300"
             >
-            </vue-qrious
+            </vue-qr
           ></v-div>
         </v-card-text>
 

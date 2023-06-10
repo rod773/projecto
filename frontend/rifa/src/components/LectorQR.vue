@@ -9,19 +9,20 @@
         </v-card-title>
         <v-card-text>
           <v-row>
-            <v-col cols="12" v-cloak @drop.prevent @dragover.prevent>
+            <v-col>
               <div class="drop-area">
                 <v-img :src="imageURL" />
               </div>
               <v-file-input
+                selected=""
                 accept="image/*"
                 capture="user"
                 label="Imagen QR"
                 v-model="imageqr"
                 @change="onFileChange"
-                @dragover="addDropFile"
                 variant="filled"
                 prepend-icon="mdi-camera"
+                clearable
               >
               </v-file-input>
             </v-col>
@@ -42,11 +43,19 @@
                       color="teal"
                       theme="dark"
                     >
-                      <router-link to="premios">
-                        <span class="text-h3" @click="lectorqr = false"
+                      <router-link to="premios" class="mx-5">
+                        <span class="text-h4" @click="lectorqr = false"
                           >premios</span
                         >
                       </router-link>
+                      <v-btn
+                        x-small
+                        icon
+                        class="bg-indigo"
+                        @click="showPremios = false"
+                      >
+                        <v-icon>mdi-close</v-icon>
+                      </v-btn>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -75,7 +84,7 @@
                 min-width="92"
                 rounded
                 variant="outlined"
-                @click="lectorqr = false"
+                @click="onClose"
               >
                 Close
               </v-btn>
@@ -146,6 +155,15 @@ const addDropFile = () => {
   }
 };
 
+//****************************** */
+
+const onClose = () => {
+  lectorqr.value = false;
+  imageqr.value = null;
+  imageURL.value = "";
+  QRdecoded.value = "";
+  showPremios.value = false;
+};
 //****************************** */
 </script>
 
