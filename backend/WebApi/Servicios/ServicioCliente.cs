@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System.Data;
 using System.Text;
+using System.Collections.Generic;
 
 namespace WebApi.Servicios
 {
@@ -30,7 +31,7 @@ namespace WebApi.Servicios
         }
 
 
-      
+        //****************************************
 
         public async Task ActualizarCliente(Cliente cliente)
         {
@@ -62,6 +63,8 @@ namespace WebApi.Servicios
 
             
         }
+
+        //****************************************
 
         public async Task<Cliente> AgregarCliente(ClienteNuevo clientenuevo)  
         {
@@ -99,6 +102,8 @@ namespace WebApi.Servicios
            
         }
 
+        //********************************************
+
         public async Task<int> BorrarCliente(int id)
         {
 
@@ -113,7 +118,7 @@ namespace WebApi.Servicios
             
          }
            
-
+        //*********************************************
         public async Task<Cliente> GetCliente(int id)
         {
             using (var conn = CreateConnection())
@@ -121,13 +126,14 @@ namespace WebApi.Servicios
                 var sql = "select * from cliente where IdCliente=@IdCliente";
 
                 
-                var res  =  conn.QueryAsync<Cliente>(sql, new { @IdCliente = id });
+                var res  =  conn.QuerySingleAsync<Cliente>(sql, new { @IdCliente = id });
 
               
                 return (Cliente)await res;
             }
         }
 
+        //********************************************
         public async Task<IEnumerable<Cliente>> GetClientes()
         {
             using (var connection = CreateConnection())
@@ -143,6 +149,7 @@ namespace WebApi.Servicios
                 
         }
 
+        //*****************************************
         public async Task<IEnumerable<Boleto>> GetBoletos()
         {
             using (var connection = CreateConnection())
@@ -158,11 +165,13 @@ namespace WebApi.Servicios
 
         }
 
+        //******************************************
+
         public async Task<IEnumerable<Boleto>> GetBoletosCliente(int id)
         {
             using (var conn = CreateConnection())
             {
-                var sql = "select * from boleto where IdCliente=@IdCliente";
+                var sql = "select * from boleto where boleto.idCliente=@IdCliente";
 
 
                 var boletos = conn.QueryAsync<Boleto>(sql, new { @IdCliente = id });
@@ -172,14 +181,45 @@ namespace WebApi.Servicios
             }
         }
 
-        public Task<IEnumerable<Premio>> GetPremios()
+        //********************************************
+
+        public async Task<IEnumerable<Premio>> GetPremios()
         {
-            throw new NotImplementedException();
+            using (var connection = CreateConnection())
+            {
+
+                var sql = "select * from premio";
+
+                var premios = connection.QueryAsync<Premio>(sql);
+
+                return await premios;
+
+            }
         }
 
-        public Task<IEnumerable<Premio>> GetPremiosCliente(int id)
+        //****************************************
+
+        public async Task<IEnumerable<Premio>> GetPremiosCliente(int id)
         {
-            throw new NotImplementedException();
+            using (var conn = CreateConnection())
+            {
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("select premio.idpremio,premio.nombre,premio.idboleto from ");
+                sb.AppendLine("premio,boleto,cliente where premio.idboleto = ");
+                sb.AppendLine("boleto.idboleto and boleto.idcliente=@idCliente");
+                
+                var sql = sb.ToString();
+
+                var premios = conn.QueryAsync<Premio>(sql, new { @IdCliente = id });
+
+
+               
+
+
+                return await premios;
+            }
         }
     }
 }

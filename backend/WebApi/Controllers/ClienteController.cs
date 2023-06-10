@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly IServicioCliente _servicioCliente;
@@ -30,6 +30,24 @@ namespace WebApi.Controllers
 
                 var clientes = await _servicioCliente.GetClientes();
                 return Ok(clientes);
+            }
+
+            catch (Exception ex)
+            {
+                //log error
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+
+        [HttpGet("GetCliente")]
+        public async Task<ActionResult> GetCliente(int id)
+        {
+            try
+            {
+
+                var cliente = await _servicioCliente.GetCliente(id);
+                return Ok(cliente);
             }
 
             catch (Exception ex)
