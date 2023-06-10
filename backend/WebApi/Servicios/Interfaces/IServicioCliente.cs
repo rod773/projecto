@@ -18,5 +18,18 @@ namespace WebApi.Servicios.Interfaces
 
 
 
+        public Task<IEnumerable<Boleto>> GetBoletos();
+
+
+        public Task<IEnumerable<Boleto>> GetBoletosCliente(int id);
+
+
+        public Task<IEnumerable<Premio>> GetPremios();
+
+
+        public Task<IEnumerable<Premio>> GetPremiosCliente(int id);
+
+
+
     }
 }

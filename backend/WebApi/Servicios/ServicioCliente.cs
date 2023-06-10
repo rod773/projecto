@@ -143,5 +143,43 @@ namespace WebApi.Servicios
                 
         }
 
+        public async Task<IEnumerable<Boleto>> GetBoletos()
+        {
+            using (var connection = CreateConnection())
+            {
+
+                var sql = "select * from boleto";
+
+                var boletos = connection.QueryAsync<Boleto>(sql);
+
+                return await boletos;
+
+            }
+
+        }
+
+        public async Task<IEnumerable<Boleto>> GetBoletosCliente(int id)
+        {
+            using (var conn = CreateConnection())
+            {
+                var sql = "select * from boleto where IdCliente=@IdCliente";
+
+
+                var boletos = conn.QueryAsync<Boleto>(sql, new { @IdCliente = id });
+
+
+                return await boletos;
+            }
+        }
+
+        public Task<IEnumerable<Premio>> GetPremios()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Premio>> GetPremiosCliente(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
