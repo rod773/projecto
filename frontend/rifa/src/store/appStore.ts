@@ -13,6 +13,8 @@ export const useAppStore = defineStore("appstore", () => {
 
   const lectorqr = ref(false);
 
+  const crearqr = ref(false);
+
   const imageqr = ref();
 
   const clientenuevo = ref<ClienteNuevo>({
@@ -83,6 +85,7 @@ export const useAppStore = defineStore("appstore", () => {
   //*********************** */
 
   return {
+    crearqr,
     imageqr,
     lectorqr,
     dialog,

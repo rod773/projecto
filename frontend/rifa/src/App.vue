@@ -18,6 +18,7 @@
           <v-btn light @click="ingresar()">Ingreso</v-btn>
           <v-btn light @click="registro()">Registro</v-btn>
           <v-btn light @click="leerqr()">Leer QR</v-btn>
+          <v-btn light @click="crearQR()">Crear QR</v-btn>
         </v-col>
       </v-row>
 
@@ -74,6 +75,7 @@
       <LoginForm />
       <RegisterForm />
       <LectorQR />
+      <CrearQR />
     </v-container>
   </v-app>
 </template>
@@ -85,6 +87,7 @@ import SideNav from "@/components/SideNav.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
 import LectorQR from "@/components/LectorQR.vue";
+import CrearQR from "@/components/CrearQR.vue";
 import Loading from "@/components/Loading.vue";
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
@@ -92,13 +95,10 @@ import { onMounted, ref } from "vue";
 
 const appstore = useAppStore();
 
-const { clientenuevo } = storeToRefs(appstore);
+const { clientenuevo, dialog, dialogreg, lectorqr, crearqr } =
+  storeToRefs(appstore);
 
-const { dialog } = storeToRefs(appstore);
-
-const { dialogreg } = storeToRefs(appstore);
-
-const { lectorqr } = storeToRefs(appstore);
+//**************************************** */
 
 const drawer = ref(false);
 
@@ -133,6 +133,13 @@ const registro = () => {
 const leerqr = () => {
   lectorqr.value = !lectorqr.value;
 
+  reload();
+};
+//******************* */
+
+const crearQR = () => {
+  crearqr.value = !crearqr.value;
+  console.log(crearqr.value);
   reload();
 };
 //******************* */

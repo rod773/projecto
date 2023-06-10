@@ -53,6 +53,18 @@
       }"
     >
     </v-list-item>
+    <v-list-item
+      prepend-icon="mdi-forum"
+      title="Premios"
+      value="premios"
+      :to="{
+        name: 'premios',
+        params: {
+          id: 'premios',
+        },
+      }"
+    >
+    </v-list-item>
   </v-list>
 </template>
 
