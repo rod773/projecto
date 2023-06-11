@@ -52,10 +52,10 @@
       </v-row>
       <v-row class="ma-0 pa-0">
         <v-col cols="8" class="col1 d-flex justify-center align-center">
-          <v-img src="@/assets/img/rifa-navideña.jpg"></v-img>
+          <v-img src="@/assets/img/rifa-navideña.png"></v-img>
         </v-col>
         <v-col cols="4" class="col2 d-flex justify-center align-center">
-          <v-img src="@/assets/img/cesta1.jpg"></v-img>
+          <v-img src="@/assets/img/cesta1.png"></v-img>
         </v-col>
       </v-row>
     </v-container>

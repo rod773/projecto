@@ -36,6 +36,7 @@ html {
     top: 0;
     background-color: rgba($indigo, 0.5);
     animation: fadeIn 2s linear;
+    z-index: 1000;
 }
 
 #headerbottom {
@@ -98,7 +99,7 @@ html {
 }
 
 .parallax {
-    background-image: url("@/assets/img/parallax.jpg");
+    background-image: url("@/assets/img/parallax.png");
     min-height: 500px;
     background-attachment: fixed;
     background-position: center;
@@ -120,4 +121,12 @@ html {
     top: 150px;
     left: 150px;
     max-width: 100px;
+    z-index: 1000;
+}
+
+#card-inicio {
+    @include flexcenter;
+    img {
+        width: 100%;
+    }
 }

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1 class="text-h2">Inicio</h1>
+    <v-card id="card-inicio" class="bg-warning">
+      <v-div class="d-flex justify-center align-center">
+        <v-img src="@/assets/img/rifa-navideña1.png" />
+      </v-div>
+    </v-card>
   </div>
 </template>
 
