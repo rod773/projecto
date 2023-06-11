@@ -14,10 +14,38 @@
           </v-btn>
         </v-col>
         <v-col cols="9" class="menu-btn">
-          <v-btn light @click="ingresar()">Ingreso</v-btn>
-          <v-btn light @click="registro()">Registro</v-btn>
-          <v-btn light @click="leerqr()">Leer QR</v-btn>
-          <v-btn light @click="crearQR()">Crear QR</v-btn>
+          <v-btn
+            class="bg-teal"
+            min-width="92"
+            rounded
+            variant="outlined"
+            @click="ingresar()"
+            >Ingreso</v-btn
+          >
+          <v-btn
+            class="bg-indigo"
+            min-width="92"
+            rounded
+            variant="outlined"
+            @click="registro()"
+            >Registro</v-btn
+          >
+          <v-btn
+            class="bg-indigo"
+            min-width="92"
+            rounded
+            variant="outlined"
+            @click="leerqr()"
+            >Leer QR</v-btn
+          >
+          <v-btn
+            class="bg-indigo"
+            min-width="92"
+            rounded
+            variant="outlined"
+            @click="crearQR()"
+            >Crear QR</v-btn
+          >
         </v-col>
       </v-row>
 
@@ -71,6 +99,7 @@
         ><v-icon color="white">mdi-arrow-up</v-icon></v-btn
       >
     </v-container>
+
     <v-container fluid class="ma-0 pa-0 elem">
       <v-col>
         <loading />
@@ -83,6 +112,7 @@
       <LectorQR />
       <CrearQR />
     </v-container>
+    <Footer />
   </v-app>
 </template>
 
@@ -95,6 +125,7 @@ import RegisterForm from "@/components/RegisterForm.vue";
 import LectorQR from "@/components/LectorQR.vue";
 import CrearQR from "@/components/CrearQR.vue";
 import Loading from "@/components/Loading.vue";
+import Footer from "@/components/Footer.vue";
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
