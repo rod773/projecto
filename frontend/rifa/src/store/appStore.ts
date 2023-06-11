@@ -1,13 +1,12 @@
 import { ref, onMounted } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import { Cliente } from "@/Interfaces/ICliente";
 import { ClienteNuevo } from "@/Interfaces/IClienteNuevo";
 import { Usuario } from "@/Interfaces/IUsuario";
 
 export const useAppStore = defineStore("appstore", () => {
   onMounted(() => {
-    autenticar("c@gmail.com", "123");
+    autenticar("", "");
   });
   const token = ref("");
 

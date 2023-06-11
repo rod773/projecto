@@ -31,12 +31,15 @@ html {
 }
 
 #headertop {
+    position: fixed;
+    width: 100%;
+    top: 0;
     background-color: rgba($indigo, 0.5);
     animation: fadeIn 2s linear;
 }
 
 #headerbottom {
-    position: fixed;
+    display: none;
     width: 100%;
     background-color: $gradient !important;
     top: 100;
@@ -86,12 +89,12 @@ html {
 
 .col1 {
     background-color: rgba($indigo, 0.5);
-    height: 200px;
+    height: 400px;
 }
 
 .col2 {
     background-color: rgba($dark, 0.5);
-    height: 200px;
+    height: 400px;
 }
 
 .parallax {
@@ -110,4 +113,11 @@ html {
 
 .v-btn:hover {
     cursor: pointer;
+}
+
+#logo {
+    position: fixed;
+    top: 150px;
+    left: 150px;
+    max-width: 100px;
 }

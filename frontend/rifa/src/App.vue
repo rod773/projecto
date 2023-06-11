@@ -13,7 +13,6 @@
             <v-icon>mdi-menu</v-icon>
           </v-btn>
         </v-col>
-
         <v-col cols="9" class="menu-btn">
           <v-btn light @click="ingresar()">Ingreso</v-btn>
           <v-btn light @click="registro()">Registro</v-btn>
@@ -31,7 +30,6 @@
             icon
             @click.stop="drawer = !drawer"
           >
-            <img src="@/assets/logo/logo_1.svg" alt="" />
           </v-btn>
         </v-col>
         <v-col cols="9" class="menu-btn">
@@ -44,13 +42,21 @@
 
     <v-container fluid class="ma-0 pa-0">
       <v-row class="ma-0 pa-0">
-        <v-col cols="12" class="parallax">
+        <v-col cols="12" class="parallax d-flex-column justify-center">
+          <v-div class="d-flex justify-center aligh-center">
+            <img src="@/assets/logo/logo_1.svg" alt="logo" id="logo" />
+          </v-div>
+
           <img src="@/assets/img/titulo.svg" alt="" />
         </v-col>
       </v-row>
       <v-row class="ma-0 pa-0">
-        <v-col cols="8" class="col1" />
-        <v-col cols="4" class="col2" />
+        <v-col cols="8" class="col1 d-flex justify-center align-center">
+          <v-img src="@/assets/img/rifa-navideña.jpg"></v-img>
+        </v-col>
+        <v-col cols="4" class="col2 d-flex justify-center align-center">
+          <v-img src="@/assets/img/cesta1.jpg"></v-img>
+        </v-col>
       </v-row>
     </v-container>
     <v-container>
@@ -189,7 +195,7 @@ const scrollUp = () => {
 onMounted(() => {
   setTimeout(() => {
     document.documentElement.scrollTop = 0;
-    autenticar("c@gmail.com", "123");
+    autenticar("rod@gmail.com", "rod");
     // console.log("token = " + token.value);
     // console.log("autenticado = " + autenticado.value);
   }, 100);
