@@ -17,26 +17,13 @@ const routes = [
     name: "blog",
     component: () => import("@/views/BlogView.vue"),
   },
-  {
-    path: "/cesta",
-    name: "cesta",
-    component: () => import("@/views/CestaView.vue"),
-  },
+
   {
     path: "/contacto",
     name: "contacto",
     component: () => import("@/views/ContactoView.vue"),
   },
-  {
-    path: "/sorteos",
-    name: "sorteos",
-    component: () => import("@/views/SorteosView.vue"),
-  },
-  {
-    path: "/pago",
-    name: "pago",
-    component: () => import("@/views/PagoView.vue"),
-  },
+
   {
     path: "/premios",
     name: "premios",
