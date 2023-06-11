@@ -117,14 +117,14 @@ namespace WebApi.Servicios
          }
            
         //*********************************************
-        public async Task<Cliente> GetCliente(int id)
+        public async Task<Cliente> GetCliente(string email)
         {
             using (var conn = CreateConnection())
             {
-                var sql = "select * from cliente where IdCliente=@IdCliente";
+                var sql = "select * from cliente where email=@email";
 
                 
-                var res  =  conn.QuerySingleAsync<Cliente>(sql, new { @IdCliente = id });
+                var res  =  conn.QuerySingleAsync<Cliente>(sql, new { @email = email });
 
               
                 return (Cliente)await res;

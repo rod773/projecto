@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebApi.Servicios.Interfaces;
 
 namespace WebApi.Models
 {
     public class Cliente
     {
 
-      
+
+
         [Key]
         public int IdCliente { get; set; }
 
@@ -21,6 +23,6 @@ namespace WebApi.Models
         
         public string Clave { get; set;}
 
-  
+       
     }
 }

@@ -95,8 +95,15 @@ import { onMounted, ref } from "vue";
 
 const appstore = useAppStore();
 
-const { clientenuevo, dialogLogin, dialogreg, lectorqr, crearqr } =
-  storeToRefs(appstore);
+const {
+  token,
+  autenticado,
+  clientenuevo,
+  dialogLogin,
+  dialogreg,
+  lectorqr,
+  crearqr,
+} = storeToRefs(appstore);
 
 //**************************************** */
 
@@ -182,6 +189,9 @@ const scrollUp = () => {
 onMounted(() => {
   setTimeout(() => {
     document.documentElement.scrollTop = 0;
+    autenticar("c@gmail.com", "123");
+    // console.log("token = " + token.value);
+    // console.log("autenticado = " + autenticado.value);
   }, 100);
 });
 </script>

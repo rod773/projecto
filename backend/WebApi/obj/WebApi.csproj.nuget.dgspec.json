@@ -52,10 +52,6 @@
               "target": "Package",
               "version": "[7.0.5, )"
             },
-            "Microsoft.Bcl.AsyncInterfaces": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.2.6, )"
@@ -67,10 +63,6 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.30.1, )"
-            },
-            "System.Linq": {
-              "target": "Package",
-              "version": "[4.3.0, )"
             }
           },
           "imports": [

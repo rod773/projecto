@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly IServicioCliente _servicioCliente;
@@ -41,12 +41,12 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("GetCliente")]
-        public async Task<ActionResult> GetCliente(int id)
+        public async Task<ActionResult> GetCliente(string email)
         {
             try
             {
 
-                var cliente = await _servicioCliente.GetCliente(id);
+                var cliente = await _servicioCliente.GetCliente(email);
                 return Ok(cliente);
             }
 

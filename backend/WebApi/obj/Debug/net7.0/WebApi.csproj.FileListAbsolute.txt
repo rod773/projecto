@@ -41,4 +41,3 @@ D:\PROYECTO\projecto - copia\backend\WebApi\obj\Debug\net7.0\refint\WebApi.dll
 D:\PROYECTO\projecto - copia\backend\WebApi\obj\Debug\net7.0\WebApi.pdb
 D:\PROYECTO\projecto - copia\backend\WebApi\obj\Debug\net7.0\WebApi.genruntimeconfig.cache
 D:\PROYECTO\projecto - copia\backend\WebApi\obj\Debug\net7.0\ref\WebApi.dll
-D:\PROYECTO\projecto - copia\backend\WebApi\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll

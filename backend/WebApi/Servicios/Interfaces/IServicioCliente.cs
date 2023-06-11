@@ -6,7 +6,7 @@ namespace WebApi.Servicios.Interfaces
 {
     public interface IServicioCliente
     {
-        public Task<Cliente> GetCliente(int id);
+        public Task<Cliente> GetCliente(string email);
 
         public Task<IEnumerable<Cliente>> GetClientes();
 

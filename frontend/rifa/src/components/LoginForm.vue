@@ -54,7 +54,13 @@
               min-width="92"
               rounded
               variant="outlined"
-              @click="dialogLogin = !autenticado"
+              @click="
+                () => {
+                  console.log(token);
+
+                  dialogLogin = !autenticado;
+                }
+              "
             >
               Close
             </v-btn>
@@ -73,7 +79,7 @@ import { ref } from "vue";
 
 const appstore = useAppStore();
 
-const { dialogLogin, autenticado } = storeToRefs(appstore);
+const { token, dialogLogin, autenticado } = storeToRefs(appstore);
 
 //*************** */
 
@@ -84,6 +90,8 @@ const password = ref("");
 
 const autenticar = (email: string, password: string) => {
   appstore.autenticar(email, password);
+  console.log("token = " + token.value);
+  console.log("autenticado = " + autenticado.value);
 };
 
 //************* */
