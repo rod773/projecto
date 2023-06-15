@@ -10,18 +10,31 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Nombres*" required></v-text-field>
+                <v-text-field
+                  v-model="nombres"
+                  label="Nombres*"
+                  required
+                ></v-text-field>
               </v-col>
 
               <v-col cols="12">
-                <v-text-field label="Apellidos*" required></v-text-field>
+                <v-text-field
+                  v-model="apellidos"
+                  label="Apellidos*"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field label="Email*" required></v-text-field>
+                <v-text-field
+                  v-model="email"
+                  label="Email*"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
                   label="Clave*"
+                  v-model="clave"
                   type="password"
                   required
                 ></v-text-field>
@@ -49,7 +62,7 @@
               min-width="92"
               rounded
               variant="outlined"
-              @click="dialogreg = false"
+              @click="agregarCliente()"
             >
               Guardar
             </v-btn>
@@ -63,8 +76,29 @@
 <script setup lang="ts">
 import { useAppStore } from "@/store/appStore";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
 const appstore = useAppStore();
 
-const { dialogreg } = storeToRefs(appstore);
+const { dialogreg, clientenuevo } = storeToRefs(appstore);
+
+//*********************************** */
+
+const nombres = ref("");
+const apellidos = ref("");
+const email = ref("");
+const clave = ref("");
+
+//*********************************** */
+
+const agregarCliente = () => {
+  clientenuevo.value.Nombres = nombres.value;
+  clientenuevo.value.Apellidos = apellidos.value;
+  clientenuevo.value.Email = email.value;
+  clientenuevo.value.Clave = clave.value;
+
+  console.log(clientenuevo.value);
+
+  appstore.agregarCliente();
+};
 </script>
