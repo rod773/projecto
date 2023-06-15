@@ -100,6 +100,8 @@ const agregarCliente = () => {
   clientenuevo.value.Email = email.value;
   clientenuevo.value.Clave = clave.value;
 
+  res.value = "";
+
   let promise = appstore.agregarCliente();
 
   let promised = Promise.resolve(promise);
