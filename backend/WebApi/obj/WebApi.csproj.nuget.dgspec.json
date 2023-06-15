@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj": {}
+    "D:\\PROJECTO\\projecto\\backend\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj": {
+    "D:\\PROJECTO\\projecto\\backend\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "D:\\PROJECTO\\projecto\\backend\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "D:\\PROYECTO\\projecto\\backend\\WebApi\\WebApi.csproj",
+        "projectPath": "D:\\PROJECTO\\projecto\\backend\\WebApi\\WebApi.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "D:\\PROYECTO\\projecto\\backend\\WebApi\\obj\\",
+        "outputPath": "D:\\PROJECTO\\projecto\\backend\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -84,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
