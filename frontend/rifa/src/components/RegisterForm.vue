@@ -67,6 +67,7 @@
               Guardar
             </v-btn>
           </div>
+          <div>{{ res }}</div>
         </v-card-actions>
       </v-card>
     </v-row>
@@ -80,7 +81,7 @@ import { ref } from "vue";
 
 const appstore = useAppStore();
 
-const { dialogreg, clientenuevo } = storeToRefs(appstore);
+const { dialogreg, clientenuevo, agregado } = storeToRefs(appstore);
 
 //*********************************** */
 
@@ -88,6 +89,8 @@ const nombres = ref("");
 const apellidos = ref("");
 const email = ref("");
 const clave = ref("");
+
+const res = ref();
 
 //*********************************** */
 
@@ -97,8 +100,13 @@ const agregarCliente = () => {
   clientenuevo.value.Email = email.value;
   clientenuevo.value.Clave = clave.value;
 
-  console.log(clientenuevo.value);
+  let promise = appstore.agregarCliente();
 
-  appstore.agregarCliente();
+  let promised = Promise.resolve(promise);
+
+  promised.then((value) => {
+    console.log(value);
+    res.value = "Cliente Ingresado";
+  });
 };
 </script>

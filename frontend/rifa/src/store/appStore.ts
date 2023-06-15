@@ -22,6 +22,10 @@ export const useAppStore = defineStore("appstore", () => {
 
   const imageqr = ref();
 
+  const agregado = ref();
+
+  //****************************** */
+
   const clientenuevo = ref<ClienteNuevo>({
     Nombres: "",
     Apellidos: "",
@@ -29,12 +33,16 @@ export const useAppStore = defineStore("appstore", () => {
     Clave: "",
   });
 
+  //************************** */
+
   const usuario = ref<Usuario>({
     correo: "",
     clave: "",
   });
 
   //********************** */
+
+  //*********************** */
 
   const getClientes = async () => {
     await axios
@@ -53,26 +61,31 @@ export const useAppStore = defineStore("appstore", () => {
   //*********************** */
 
   const agregarCliente = async () => {
+    let res;
     const instance = axios.create({
       baseURL: "http://localhost:7071/api/Cliente",
-      timeout: 1000,
+      timeout: 2000,
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${token.value}`,
       },
     });
 
-    await instance
-      .post("PostCliente", {
-        Nombres: clientenuevo.value.Nombres,
-        Apellidos: clientenuevo.value.Apellidos,
-        Email: clientenuevo.value.Email,
-        Clave: clientenuevo.value.Clave,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => console.error(error));
+    return new Promise((resolve, reject) => {
+      instance
+        .post("PostCliente", {
+          Nombres: clientenuevo.value.Nombres,
+          Apellidos: clientenuevo.value.Apellidos,
+          Email: clientenuevo.value.Email,
+          Clave: clientenuevo.value.Clave,
+        })
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   };
 
   //************************* */
@@ -92,7 +105,7 @@ export const useAppStore = defineStore("appstore", () => {
         //console.log(token.value);
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         autenticado.value = false;
         dialogLogin.value = true;
       });
@@ -114,5 +127,6 @@ export const useAppStore = defineStore("appstore", () => {
     clientenuevo,
     agregarCliente,
     getClientes,
+    agregado,
   };
 });
