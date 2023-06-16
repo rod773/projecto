@@ -100,21 +100,23 @@ export const useAppStore = defineStore("appstore", () => {
       clave: password,
     };
 
-    await axios
-      .post("http://localhost:7071/api/Autenticacion/Validar", usuario.value)
-      .then((response) => {
-        token.value = response.data.token;
-        autenticado.value = true;
-        dialogLogin.value = false;
-        //console.log(token.value);
-      })
-      .catch((error) => {
-        // console.error(error);
-        autenticado.value = false;
-        dialogLogin.value = true;
-      });
-
-    return await token.value;
+    return new Promise((resolve, reject) => {
+      axios
+        .post("http://localhost:7071/api/Autenticacion/Validar", usuario.value)
+        .then((response) => {
+          token.value = response.data.token;
+          autenticado.value = true;
+          dialogLogin.value = false;
+          //console.log(token.value);
+          resolve(response);
+        })
+        .catch((error) => {
+          // console.error(error);
+          autenticado.value = false;
+          dialogLogin.value = true;
+          reject(error);
+        });
+    });
   };
 
   //*********************** */
