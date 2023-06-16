@@ -45,23 +45,27 @@ export const useAppStore = defineStore("appstore", () => {
   //*********************** */
 
   const getClientes = async () => {
-    await axios
-      .get("http://localhost:7071/api/Cliente/GetClientes", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token.value}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => console.error(error));
+    return new Promise((resolve, reject) => {
+      axios
+        .get("http://localhost:7071/api/Cliente/GetClientes", {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token.value}`,
+          },
+        })
+        .then((response) => {
+          resolve(response);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   };
 
   //*********************** */
 
   const agregarCliente = async () => {
-    let res;
     const instance = axios.create({
       baseURL: "http://localhost:7071/api/Cliente",
       timeout: 2000,
